@@ -8,7 +8,7 @@ use AlgoliaSearch\Version as AlgoliaUserAgent;
 require __DIR__ . '/vendor/autoload.php';
 
 $query = $argv[1];
-$branch = $_ENV['branch'] ?? '5.6';
+$branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
