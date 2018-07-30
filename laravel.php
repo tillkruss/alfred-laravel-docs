@@ -14,7 +14,7 @@ $workflow = new Workflow;
 $parsedown = new Parsedown;
 $algolia = new Algolia('8BB87I11DE', '8e1d446d61fce359f69cd7c8b86a50de');
 
-AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.1.0');
+AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.0');
 
 $index = $algolia->initIndex('docs');
 $search = $index->search($query, ['tagFilters' => $branch]);

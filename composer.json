@@ -1,4 +1,14 @@
 {
+    "name": "tillkruss/alfred-lorem-ipsum",
+    "description": "An ultra-fast Laravel docs search workflow for Alfred 3",
+    "version": "0.2.0",
+    "keywords": ["alfred", "alfred-workflow", "laravel", "algolia"],
+    "homepage": "https://till.im",
+    "support": {
+        "source": "https://github.com/tillkruss/alfred-laravel-docs",
+        "issues": "https://github.com/tillkruss/alfred-laravel-docs/issues"
+    },
+    "license": "MIT",
     "require": {
         "joetannenbaum/alfred-workflow": "^0.1.0",
         "algolia/algoliasearch-client-php": "^1.27",
