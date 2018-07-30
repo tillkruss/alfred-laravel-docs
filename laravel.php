@@ -40,9 +40,12 @@ foreach ($results as $hit) {
     $title = $hit['h1'];
     $subtitle = $hasSubtitle ? $hit['h2'] : null;
 
-    if ($hasSubtitle && $hasText) {
-        $title = $hit['h2'];
+    if ($hasText) {
         $subtitle = $hit['_highlightResult']['content']['value'];
+
+        if ($hasSubtitle) {
+            $title = "{$title} » {$hit['h2']}";
+        }
     }
 
     $title = strip_tags(html_entity_decode($title, ENT_QUOTES, 'UTF-8'));
