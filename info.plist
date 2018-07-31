@@ -141,7 +141,7 @@ For example setting the value of `branch` variable on the right `5.5` will searc
 		<string>master</string>
 	</dict>
 	<key>version</key>
-	<string>0.2.1</string>
+	<string>0.2.2</string>
 	<key>webaddress</key>
 	<string>https://till.im</string>
 </dict>
