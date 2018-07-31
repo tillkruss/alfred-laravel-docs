@@ -24,18 +24,22 @@ $results = $search['hits'];
 $subtextSupported = $subtext === '0' || $subtext === '2';
 
 if (empty($results)) {
-    $fallback = sprintf('https://www.google.com/search?q=%s', rawurlencode("laravel {$query}"));
+    $google = sprintf('https://www.google.com/search?q=%s', rawurlencode("laravel {$query}"));
 
     $workflow->result()
-        ->title(
-            $subtextSupported ? 'No matches' : 'No match found. Search Google...'
-        )
+        ->title($subtextSupported ? 'Search Google' : 'No match found. Search Google...')
         ->icon('google.png')
-        ->subtitle(
-            sprintf('No match found in the %s docs. Search Google for: "Laravel %s"', $branch, $query)
-        )
-        ->arg($fallback)
-        ->quicklookurl($fallback)
+        ->subtitle(sprintf('No match found. Search Google for: "%s"', $query))
+        ->arg($google)
+        ->quicklookurl($google)
+        ->valid(true);
+
+    $workflow->result()
+        ->title($subtextSupported ? 'Open Docs' : 'No match found. Open docs...')
+        ->icon('icon.png')
+        ->subtitle('No match found. Open laravel.com/docs...')
+        ->arg('https://laravel.com/docs/')
+        ->quicklookurl('https://laravel.com/docs/')
         ->valid(true);
 
     echo $workflow->output();
