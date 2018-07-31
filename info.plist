@@ -83,9 +83,9 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search the Laravel docs...</string>
+				<string>Search the Laravel {var:branch} docs...</string>
 				<key>title</key>
-				<string>Laravel</string>
+				<string>Laravel Docs</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
