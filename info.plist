@@ -100,7 +100,24 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>An ultra-fast Laravel docs search workflow for Alfred 3.
+
+## Usage
+
+Just type `ld` followed by your search query.
+
+```
+ld &lt;query&gt;
+ld preview mailables
+```
+
+Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open it in your web browser.
+
+## Changing Branches
+
+By default this workflow searches the `master` branch of the docs. However, you can change that to any branch listed on laravel.com/docs.
+
+For example setting the value of `branch` variable on the right `5.5` will search the v5.5 docs by default.</string>
 	<key>uidata</key>
 	<dict>
 		<key>7B86D057-DA8E-4302-AF17-83B889B48EE2</key>
