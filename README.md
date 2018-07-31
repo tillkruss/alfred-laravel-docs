@@ -16,7 +16,7 @@ An ultra-fast Laravel docs search workflow for Alfred 3.
 ld <query>
 ```
 
-Just type `ld` followed by your search query.
+Just type `ld` followed by your search query. Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in your web browser.
 
 ## Changing Branches
 
