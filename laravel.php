@@ -54,36 +54,56 @@ foreach ($results as $hit) {
     $urls[] = $url;
 
     $hasText = isset($hit['_highlightResult']['content']['value']);
-    $hasSubtitle = isset($hit['h2']);
 
     $title = $hit['h1'];
-    $subtitle = $hasSubtitle ? $hit['h2'] : null;
+    $subtitle = subtitle($hit);
 
-    if ($subtextSupported && $hasText) {
-        $subtitle = $hit['_highlightResult']['content']['value'];
-
-        if ($hasSubtitle) {
-            $title = "{$title} » {$hit['h2']}";
-        }
+    if (! $subtextSupported && $subtitle) {
+        $title = "{$title} » {$subtitle}";
     }
 
-    if (! $subtextSupported && $hasSubtitle) {
-        $title = "{$title} » {$hit['h2']}";
+    if ($subtextSupported) {
+        $text = $subtitle;
+
+        if ($hasText) {
+            $text = $hit['_highlightResult']['content']['value'];
+
+            if ($subtitle) {
+                $title = "{$title} » {$subtitle}";
+            }
+        }
     }
 
     $title = strip_tags(html_entity_decode($title, ENT_QUOTES, 'UTF-8'));
 
-    $subtitle = $parsedown->line($subtitle);
-    $subtitle = strip_tags(html_entity_decode($subtitle, ENT_QUOTES, 'UTF-8'));
+    $text = $parsedown->line($text);
+    $text = strip_tags(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
 
     $workflow->result()
         ->uid($hit['objectID'])
         ->title($title)
         ->autocomplete($title)
-        ->subtitle($subtitle)
+        ->subtitle($text)
         ->arg($url)
         ->quicklookurl($url)
         ->valid(true);
 }
 
 echo $workflow->output();
+
+function subtitle($hit)
+{
+    if (isset($hit['h4'])) {
+        return $hit['h4'];
+    }
+
+    if (isset($hit['h3'])) {
+        return $hit['h3'];
+    }
+
+    if (isset($hit['h2'])) {
+        return $hit['h2'];
+    }
+
+    return null;
+}
