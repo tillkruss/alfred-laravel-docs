@@ -8,7 +8,13 @@ use AlgoliaSearch\Version as AlgoliaUserAgent;
 require __DIR__ . '/vendor/autoload.php';
 
 $query = $argv[1];
-$branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+preg_match('/^\s*?v?(master|(?:[\d]+)(?:\.[\d]+)?(?:\.[\d]+)?)?\s*?(.*?)$/', $query, $matches);
+if (trim($matches[1]) != "") {
+    $branch = $matches[1];
+    $query = $matches[2];
+} else {
+    $branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+}
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
@@ -33,12 +39,20 @@ if (empty($results)) {
     exit;
 }
 
+$hits = [];
 foreach ($results as $hit) {
+    $url = "https://laravel.com/docs/{$branch}/{$hit['link']}";
+    if (in_array($url, $hits)) {
+        // Already included this URL
+        continue;
+    }
+    $hits[] = $url;
+
     $hasText = isset($hit['_highlightResult']['content']['value']);
     $hasSubtitle = isset($hit['h2']);
 
     $title = $hit['h1'];
-    $subtitle = $hasSubtitle ? $hit['h2'] : null;
+    $subtitle = $hit['h2'] . (! is_null($hit['h3']) ? " | " . $hit['h3'] : null) . (! is_null($hit['h4']) ? " » " . $hit['h4'] : null);
 
     if ($hasText) {
         $subtitle = $hit['_highlightResult']['content']['value'];
@@ -58,8 +72,8 @@ foreach ($results as $hit) {
         ->title($title)
         ->autocomplete($title)
         ->subtitle($subtitle)
-        ->arg("https://laravel.com/docs/{$branch}/{$hit['link']}")
-        ->quicklookurl("https://laravel.com/docs/{$branch}/{$hit['link']}")
+        ->arg($url)
+        ->quicklookurl($url)
         ->valid(true);
 }
 
