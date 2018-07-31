@@ -52,7 +52,7 @@ foreach ($results as $hit) {
     $hasSubtitle = isset($hit['h2']);
 
     $title = $hit['h1'];
-    $subtitle = $hasSubtitle ? $hit['h2'] : null;
+    $subtitle = $hit['h2'] . (! is_null($hit['h3']) ? " | " . $hit['h3'] : null) . (! is_null($hit['h4']) ? " » " . $hit['h4'] : null);
 
     if ($hasText) {
         $subtitle = $hit['_highlightResult']['content']['value'];
