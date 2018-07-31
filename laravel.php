@@ -27,9 +27,13 @@ if (empty($results)) {
     $fallback = sprintf('https://www.google.com/search?q=%s', rawurlencode("laravel {$query}"));
 
     $workflow->result()
-        ->title($subtextSupported ? 'No matches' : 'No match found. Search Google...')
+        ->title(
+            $subtextSupported ? 'No matches' : 'No match found. Search Google...'
+        )
         ->icon('google.png')
-        ->subtitle("No match found in the {$branch} docs. Search Google for: \"Laravel {$query}\"")
+        ->subtitle(
+            sprintf('No match found in the %s docs. Search Google for: "Laravel %s"', $branch, $query)
+        )
         ->arg($fallback)
         ->quicklookurl($fallback)
         ->valid(true);
