@@ -8,7 +8,13 @@ use AlgoliaSearch\Version as AlgoliaUserAgent;
 require __DIR__ . '/vendor/autoload.php';
 
 $query = $argv[1];
-$branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+preg_match('/^\s*?v?(master|(?:[\d]+)(?:\.[\d]+)?(?:\.[\d]+)?)?\s*?(.*?)$/', $query, $matches);
+if (trim($matches[1]) != "") {
+    $branch = $matches[1];
+    $query = $matches[2];
+} else {
+    $branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+}
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
