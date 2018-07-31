@@ -24,12 +24,14 @@ $results = $search['hits'];
 $subtextSupported = $subtext === '0' || $subtext === '2';
 
 if (empty($results)) {
+    $fallback = sprintf('https://www.google.com/search?q=%s', rawurlencode("laravel {$query}"));
+
     $workflow->result()
         ->title($subtextSupported ? 'No matches' : 'No match found. Search Google...')
         ->icon('google.png')
         ->subtitle("No match found in the {$branch} docs. Search Google for: \"Laravel {$query}\"")
-        ->arg("https://www.google.com/search?q=laravel+{$query}")
-        ->quicklookurl("https://www.google.com/search?q=laravel+{$query}")
+        ->arg($fallback)
+        ->quicklookurl($fallback)
         ->valid(true);
 
     echo $workflow->output();
@@ -60,13 +62,15 @@ foreach ($results as $hit) {
     $subtitle = $parsedown->line($subtitle);
     $subtitle = strip_tags(html_entity_decode($subtitle, ENT_QUOTES, 'UTF-8'));
 
+    $url = sprintf("https://laravel.com/docs/%s/%s", $branch, $hit['link']);
+
     $workflow->result()
         ->uid($hit['objectID'])
         ->title($title)
         ->autocomplete($title)
         ->subtitle($subtitle)
-        ->arg("https://laravel.com/docs/{$branch}/{$hit['link']}")
-        ->quicklookurl("https://laravel.com/docs/{$branch}/{$hit['link']}")
+        ->arg($url)
+        ->quicklookurl($url)
         ->valid(true);
 }
 
