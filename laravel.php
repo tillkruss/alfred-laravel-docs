@@ -42,7 +42,17 @@ if (empty($results)) {
     exit;
 }
 
+$urls = [];
+
 foreach ($results as $hit) {
+    $url = sprintf("https://laravel.com/docs/%s/%s", $branch, $hit['link']);
+
+    if (in_array($url, $urls)) {
+        continue;
+    }
+
+    $urls[] = $url;
+
     $hasText = isset($hit['_highlightResult']['content']['value']);
     $hasSubtitle = isset($hit['h2']);
 
@@ -65,8 +75,6 @@ foreach ($results as $hit) {
 
     $subtitle = $parsedown->line($subtitle);
     $subtitle = strip_tags(html_entity_decode($subtitle, ENT_QUOTES, 'UTF-8'));
-
-    $url = sprintf("https://laravel.com/docs/%s/%s", $branch, $hit['link']);
 
     $workflow->result()
         ->uid($hit['objectID'])
