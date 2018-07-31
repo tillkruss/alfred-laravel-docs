@@ -9,6 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $query = $argv[1];
 $branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+$subtext = empty($_ENV['alfred_theme_subtext']) ? '0' : $_ENV['alfred_theme_subtext'];
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
@@ -20,9 +21,11 @@ $index = $algolia->initIndex('docs');
 $search = $index->search($query, ['tagFilters' => $branch]);
 $results = $search['hits'];
 
+$subtextSupported = $subtext === '0' || $subtext === '2';
+
 if (empty($results)) {
     $workflow->result()
-        ->title('No matches')
+        ->title($subtextSupported ? 'No matches' : 'No match found. Search Google...')
         ->icon('google.png')
         ->subtitle("No match found in the {$branch} docs. Search Google for: \"Laravel {$query}\"")
         ->arg("https://www.google.com/search?q=laravel+{$query}")
@@ -40,12 +43,16 @@ foreach ($results as $hit) {
     $title = $hit['h1'];
     $subtitle = $hasSubtitle ? $hit['h2'] : null;
 
-    if ($hasText) {
+    if ($subtextSupported && $hasText) {
         $subtitle = $hit['_highlightResult']['content']['value'];
 
         if ($hasSubtitle) {
             $title = "{$title} » {$hit['h2']}";
         }
+    }
+
+    if (! $subtextSupported && $hasSubtitle) {
+        $title = "{$title} » {$hit['h2']}";
     }
 
     $title = strip_tags(html_entity_decode($title, ENT_QUOTES, 'UTF-8'));
