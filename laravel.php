@@ -24,9 +24,9 @@ if (empty($results)) {
     $workflow->result()
         ->title('No matches')
         ->icon('google.png')
-        ->subtitle("No match found in the {$branch} docs. Search Google for: \"{$query}\"")
-        ->arg("https://www.google.com/search?q={$query}")
-        ->quicklookurl("https://www.google.com/search?q={$query}")
+        ->subtitle("No match found in the {$branch} docs. Search Google for: \"Laravel {$query}\"")
+        ->arg("https://www.google.com/search?q=laravel+{$query}")
+        ->quicklookurl("https://www.google.com/search?q=laravel+{$query}")
         ->valid(true);
 
     echo $workflow->output();
