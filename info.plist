@@ -63,7 +63,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>4</integer>
 				<key>keyword</key>
 				<string>ld</string>
 				<key>queuedelaycustom</key>
