@@ -39,7 +39,15 @@ if (empty($results)) {
     exit;
 }
 
+$hits = [];
 foreach ($results as $hit) {
+    $url = "https://laravel.com/docs/{$branch}/{$hit['link']}";
+    if (in_array($url, $hits)) {
+        // Already included this URL
+        continue;
+    }
+    $hits[] = $url;
+
     $hasText = isset($hit['_highlightResult']['content']['value']);
     $hasSubtitle = isset($hit['h2']);
 
@@ -64,8 +72,8 @@ foreach ($results as $hit) {
         ->title($title)
         ->autocomplete($title)
         ->subtitle($subtitle)
-        ->arg("https://laravel.com/docs/{$branch}/{$hit['link']}")
-        ->quicklookurl("https://laravel.com/docs/{$branch}/{$hit['link']}")
+        ->arg($url)
+        ->quicklookurl($url)
         ->valid(true);
 }
 
