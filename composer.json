@@ -1,7 +1,7 @@
 {
-    "name": "tillkruss/alfred-lorem-ipsum",
-    "description": "An ultra-fast Laravel docs search workflow for Alfred 3",
     "version": "0.2.1",
+    "name": "tillkruss/alfred-laravel-docs",
+    "description": "An ultra-fast Laravel docs search workflow for Alfred 3.",
     "keywords": ["alfred", "alfred-workflow", "laravel", "algolia"],
     "homepage": "https://till.im",
     "support": {
