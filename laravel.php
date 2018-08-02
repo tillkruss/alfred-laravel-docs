@@ -11,7 +11,7 @@ $query = $argv[1];
 
 preg_match('/^\h*?v?(master|(?:[\d]+)(?:\.[\d]+)?(?:\.[\d]+)?)?\h*?(.*?)$/', $query, $matches);
 
-if (trim($matches[1]) != "") {
+if (empty(trim($matches[1]))) {
     $branch = $matches[1];
     $query = $matches[2];
 } else {
