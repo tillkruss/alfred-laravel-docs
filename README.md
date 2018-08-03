@@ -21,6 +21,10 @@ ld preview mailables
 
 Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in your web browser.
 
+## Spoiler to Windows guys
+
+Alfred is not supported in Windows. Mac OS only.
+
 ## Changing Branches
 
 By default this workflow searches the `master` branch of the docs. However, you can change that to any branch listed on [laravel.com/docs](https://laravel.com/docs).
