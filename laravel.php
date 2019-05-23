@@ -15,7 +15,11 @@ if (! empty(trim($matches[1]))) {
     $branch = $matches[1];
     $query = $matches[2];
 } else {
-    $branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+    $branch = $_ENV['branch'];
+}
+
+if ($branch === 'latest') {
+    $branch = null;
 }
 
 $subtext = empty($_ENV['alfred_theme_subtext']) ? '0' : $_ENV['alfred_theme_subtext'];
@@ -27,7 +31,7 @@ $algolia = new Algolia('8BB87I11DE', '8e1d446d61fce359f69cd7c8b86a50de');
 AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.2');
 
 $index = $algolia->initIndex('docs');
-$search = $index->search($query, ['tagFilters' => $branch]);
+$search = $index->search($query, ['tagFilters' => $branch ?: 'master']);
 $results = $search['hits'];
 
 $subtextSupported = $subtext === '0' || $subtext === '2';
@@ -55,10 +59,11 @@ if (empty($results)) {
     exit;
 }
 
+$docs = sprintf('https://laravel.com/docs/%s', $branch ? $branch . '/' : '');
 $urls = [];
 
 foreach ($results as $hit) {
-    $url = sprintf("https://laravel.com/docs/%s/%s", $branch, $hit['link']);
+    $url = $docs . $hit['link'];
 
     if (in_array($url, $urls)) {
         continue;
