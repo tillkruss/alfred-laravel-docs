@@ -28,7 +28,7 @@ $workflow = new Workflow;
 $parsedown = new Parsedown;
 $algolia = new Algolia('8BB87I11DE', '8e1d446d61fce359f69cd7c8b86a50de');
 
-AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.2');
+AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.3');
 
 $index = $algolia->initIndex('docs');
 $search = $index->search($query, ['tagFilters' => $branch ?: 'master']);
