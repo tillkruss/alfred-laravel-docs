@@ -8,17 +8,30 @@ use AlgoliaSearch\Version as AlgoliaUserAgent;
 require __DIR__ . '/vendor/autoload.php';
 
 $query = $argv[1];
-$branch = empty($_ENV['branch']) ? 'master' : $_ENV['branch'];
+
+preg_match('/^\h*?v?(master|(?:[\d]+)(?:\.[\d]+)?(?:\.[\d]+)?)?\h*?(.*?)$/', $query, $matches);
+
+if (! empty(trim($matches[1]))) {
+    $branch = $matches[1];
+    $query = $matches[2];
+} else {
+    $branch = $_ENV['branch'];
+}
+
+if ($branch === 'latest') {
+    $branch = null;
+}
+
 $subtext = empty($_ENV['alfred_theme_subtext']) ? '0' : $_ENV['alfred_theme_subtext'];
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
 $algolia = new Algolia('8BB87I11DE', '8e1d446d61fce359f69cd7c8b86a50de');
 
-AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.2');
+AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.3');
 
 $index = $algolia->initIndex('docs');
-$search = $index->search($query, ['tagFilters' => $branch]);
+$search = $index->search($query, ['tagFilters' => $branch ?: 'master']);
 $results = $search['hits'];
 
 $subtextSupported = $subtext === '0' || $subtext === '2';
@@ -46,10 +59,11 @@ if (empty($results)) {
     exit;
 }
 
+$docs = sprintf('https://laravel.com/docs/%s', $branch ? $branch . '/' : '');
 $urls = [];
 
 foreach ($results as $hit) {
-    $url = sprintf("https://laravel.com/docs/%s/%s", $branch, $hit['link']);
+    $url = $docs . $hit['link'];
 
     if (in_array($url, $urls)) {
         continue;
