@@ -22,7 +22,11 @@ if ($branch === 'latest') {
     $branch = null;
 }
 
-$subtext = empty(getenv('alfred_theme_subtext')) ? '0' : getenv('alfred_theme_subtext');
+$subtext = getenv('alfred_theme_subtext');
+
+if (empty($subtext)) {
+    $subtext = '0';
+}
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
