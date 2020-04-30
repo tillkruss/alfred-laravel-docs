@@ -15,14 +15,14 @@ if (! empty(trim($matches[1]))) {
     $branch = $matches[1];
     $query = $matches[2];
 } else {
-    $branch = $_ENV['branch'];
+    $branch = getenv('branch');
 }
 
 if ($branch === 'latest') {
     $branch = null;
 }
 
-$subtext = empty($_ENV['alfred_theme_subtext']) ? '0' : $_ENV['alfred_theme_subtext'];
+$subtext = empty(getenv('alfred_theme_subtext')) ? '0' : getenv('alfred_theme_subtext');
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
