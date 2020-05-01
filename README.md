@@ -1,6 +1,6 @@
 # Laravel Docs Workflow for Alfred
 
-An ultra-fast Laravel docs search workflow for [Alfred 3](https://www.alfredapp.com).
+An ultra-fast Laravel docs search workflow for [Alfred 3+](https://www.alfredapp.com).
 
 ![Screenshot](screenshot.png)
 
