@@ -93,6 +93,8 @@ foreach ($results as $hit) {
             if ($subtitle) {
                 $title = "{$title} » {$subtitle}";
             }
+        } else {
+          $text = sprintf('%s » %s', $hit['hierarchy']['lvl1'], $hit['hierarchy']['lvl2']);
         }
     }
 
