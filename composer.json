@@ -11,7 +11,6 @@
     "license": "MIT",
     "require": {
         "joetannenbaum/alfred-workflow": "^0.1.0",
-        "algolia/algoliasearch-client-php": "^2.7",
-        "erusev/parsedown": "^1.7"
+        "algolia/algoliasearch-client-php": "^2.7"
     }
 }

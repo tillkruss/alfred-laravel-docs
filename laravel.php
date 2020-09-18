@@ -29,8 +29,6 @@ if (empty($subtext)) {
 }
 
 $workflow = new Workflow;
-$parsedown = new Parsedown;
-
 $algolia = SearchClient::create('BH4D9OD16A', '7dc4fe97e150304d1bf34f5043f178c4');
 
 UserAgent::addCustomUserAgent('Alfred Workflow', '0.3.0');
@@ -101,7 +99,6 @@ foreach ($results as $hit) {
 
     $title = strip_tags(html_entity_decode($title, ENT_QUOTES, 'UTF-8'));
 
-    $text = $parsedown->line($text);
     $text = strip_tags(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
 
     $workflow->result()
