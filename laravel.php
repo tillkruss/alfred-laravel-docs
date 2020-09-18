@@ -64,11 +64,10 @@ if (empty($results)) {
     exit;
 }
 
-$docs = sprintf('https://laravel.com/docs/%s', $branch ? $branch . '/' : '');
 $urls = [];
 
 foreach ($results as $hit) {
-    $url = $docs . $hit['link'];
+    $url = $hit['url'];
 
     if (in_array($url, $urls)) {
         continue;
@@ -78,7 +77,7 @@ foreach ($results as $hit) {
 
     $hasText = isset($hit['_highlightResult']['content']['value']);
 
-    $title = $hit['h1'];
+    $title = $hit['hierarchy']['lvl0'];
     $subtitle = subtitle($hit);
 
     if (! $subtextSupported && $subtitle) {
@@ -100,6 +99,7 @@ foreach ($results as $hit) {
     $title = strip_tags(html_entity_decode($title, ENT_QUOTES, 'UTF-8'));
 
     $text = strip_tags(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
+    $text = preg_replace('/\s+/', ' ', $text);
 
     $workflow->result()
         ->uid($hit['objectID'])
@@ -115,16 +115,16 @@ echo $workflow->output();
 
 function subtitle($hit)
 {
-    if (isset($hit['h4'])) {
-        return $hit['h4'];
+    if (isset($hit['hierarchy']['lvl3'])) {
+        return $hit['hierarchy']['lvl3'];
     }
 
-    if (isset($hit['h3'])) {
-        return $hit['h3'];
+    if (isset($hit['hierarchy']['lvl2'])) {
+        return $hit['hierarchy']['lvl2'];
     }
 
-    if (isset($hit['h2'])) {
-        return $hit['h2'];
+    if (isset($hit['hierarchy']['lvl1'])) {
+        return $hit['hierarchy']['lvl1'];
     }
 
     return null;
