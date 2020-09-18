@@ -2,8 +2,8 @@
 
 use Alfred\Workflows\Workflow;
 
-use AlgoliaSearch\Client as Algolia;
-use AlgoliaSearch\Version as AlgoliaUserAgent;
+use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Support\UserAgent;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -30,14 +30,17 @@ if (empty($subtext)) {
 
 $workflow = new Workflow;
 $parsedown = new Parsedown;
-$algolia = new Algolia('8BB87I11DE', '8e1d446d61fce359f69cd7c8b86a50de');
 
-AlgoliaUserAgent::addSuffixUserAgentSegment('Alfred Workflow', '0.2.4');
+$algolia = SearchClient::create('BH4D9OD16A', '7dc4fe97e150304d1bf34f5043f178c4');
 
-$index = $algolia->initIndex('docs');
-$search = $index->search($query, ['tagFilters' => $branch ?: 'master']);
+UserAgent::addCustomUserAgent('Alfred Workflow', '0.3.0');
+
+$index = $algolia->initIndex('laravel');
+$search = $index->search($query, ['facetFilters' => [
+    sprintf('version:%s', $branch ?: 'master'),
+]]);
+
 $results = $search['hits'];
-
 $subtextSupported = $subtext === '0' || $subtext === '2';
 
 if (empty($results)) {
