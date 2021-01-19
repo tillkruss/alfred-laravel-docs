@@ -119,7 +119,7 @@ Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open i
 
 By default this workflow searches the `master` branch of the docs. However, you can change that to any branch listed on laravel.com/docs.
 
-For example setting the value of `branch` variable on the right `5.x` will search the v8.x docs by default.</string>
+For example setting the value of `branch` variable on the right to `8.x` will search the v8.x docs by default.</string>
 	<key>uidata</key>
 	<dict>
 		<key>7B86D057-DA8E-4302-AF17-83B889B48EE2</key>
