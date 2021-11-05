@@ -34,7 +34,7 @@ if (empty($subtext)) {
 $workflow = new Workflow;
 $algolia = SearchClient::create('BH4D9OD16A', '7dc4fe97e150304d1bf34f5043f178c4');
 
-UserAgent::addCustomUserAgent('Alfred Workflow', '0.3.0');
+UserAgent::addCustomUserAgent('Alfred Workflow', '0.3.1');
 
 $index = $algolia->initIndex('laravel');
 $search = $index->search($query, ['facetFilters' => [
