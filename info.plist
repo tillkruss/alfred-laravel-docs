@@ -140,7 +140,7 @@ For example setting the value of `branch` variable on the right to `8.x` will se
 	<key>variables</key>
 	<dict>
 		<key>branch</key>
-		<string>master</string>
+		<string>8.x</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
