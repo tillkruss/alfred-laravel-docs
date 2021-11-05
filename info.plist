@@ -79,9 +79,9 @@
 				<key>runningsubtext</key>
 				<string>Searching docs for "{query}"...</string>
 				<key>script</key>
-				<string>php laravel.php "{query}"</string>
+				<string>/opt/homebrew/bin/php laravel.php "$1"</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -142,6 +142,8 @@ For example setting the value of `branch` variable on the right to `8.x` will se
 		<key>branch</key>
 		<string>master</string>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>0.3.0</string>
 	<key>webaddress</key>
