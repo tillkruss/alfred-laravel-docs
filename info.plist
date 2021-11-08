@@ -79,7 +79,7 @@
 				<key>runningsubtext</key>
 				<string>Searching docs for "{query}"...</string>
 				<key>script</key>
-				<string>/opt/homebrew/bin/php laravel.php "$1"</string>
+				<string>`which php` laravel.php "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
