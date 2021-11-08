@@ -79,7 +79,13 @@
 				<key>runningsubtext</key>
 				<string>Searching docs for "{query}"...</string>
 				<key>script</key>
-				<string>`which php` laravel.php "$1"</string>
+				<string>if [ -f "/opt/homebrew/bin/php" ]; then
+    /opt/homebrew/bin/php laravel.php "$1"
+elif [ -f "/usr/local/bin/php" ]; then
+    /usr/local/bin/php laravel.php "$1"
+elif [ -f "/usr/bin/php" ]; then
+    /usr/bin/php laravel.php "$1"
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
