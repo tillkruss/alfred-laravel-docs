@@ -151,7 +151,7 @@ For example setting the value of `branch` variable on the right to `8.x` will se
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.3.1</string>
+	<string>0.3.2</string>
 	<key>webaddress</key>
 	<string>https://till.im</string>
 </dict>
