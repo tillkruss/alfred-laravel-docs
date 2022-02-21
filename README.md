@@ -27,4 +27,4 @@ By default this workflow searches the `master` branch of the docs. However, you 
 
 1. Go to the _Laravel Docs_ workflow in your Alfred preferences
 2. Click the `[𝝌]` icon
-3. Set the value of `branch` variable to your desired version (e.g. `8.x`)
+3. Set the value of `branch` variable to your desired version (e.g. `9.x`)
