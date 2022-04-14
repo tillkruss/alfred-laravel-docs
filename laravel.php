@@ -87,6 +87,7 @@ foreach ($results as $hit) {
         $title = "{$title} » {$subtitle}";
     }
 
+    $text = '';
     if ($subtextSupported) {
         $text = $subtitle;
 
