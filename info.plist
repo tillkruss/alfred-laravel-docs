@@ -87,6 +87,8 @@ elif [ -f "$HOME/Library/Application Support/Herd/bin/php" ]; then
     "$HOME/Library/Application Support/Herd/bin/php" laravel.php "{query}"
 elif [ -f "/usr/bin/php" ]; then
     /usr/bin/php laravel.php "{query}"
+elif [ -f "$HOME/Library/Application Support/Herd/bin/php" ]; then
+    "$HOME/Library/Application Support/Herd/bin/php" laravel.php "{query}"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>

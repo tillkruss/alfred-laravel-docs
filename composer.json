@@ -10,7 +10,7 @@
     },
     "license": "MIT",
     "require": {
-        "joetannenbaum/alfred-workflow": "^0.1.0",
-        "algolia/algoliasearch-client-php": "^3.0"
+        "joetannenbaum/alfred-workflow": "^0.1.3",
+        "algolia/algoliasearch-client-php": "^3.4"
     }
 }
