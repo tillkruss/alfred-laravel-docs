@@ -37,12 +37,14 @@
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -87,7 +89,8 @@ elif [ -f "$HOME/Library/Application Support/Herd/bin/php" ]; then
     "$HOME/Library/Application Support/Herd/bin/php" laravel.php "{query}"
 elif [ -f "/usr/bin/php" ]; then
     /usr/bin/php laravel.php "{query}"
-fi</string>
+fi
+</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -125,35 +128,50 @@ Either press `⌘Y` to Quick Look the result, or press `&lt;enter&gt;` to open i
 
 ## Changing Branches
 
-By default this workflow searches the `master` branch of the docs. However, you can change that to any branch listed on laravel.com/docs.
+By default this workflow searches the `master` branch of the docs. However, you can change that to any branch listed on laravel.com/docs. Click Alfred's "Configure..." option to edit the configuration.
 
-For example setting the value of `branch` variable on the right to `9.x` will search the v9.x docs by default.</string>
+For example, setting the value of `branch` variable to `12` (or 12.x) will search the v12.x docs by default.</string>
 	<key>uidata</key>
 	<dict>
 		<key>7B86D057-DA8E-4302-AF17-83B889B48EE2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>200</integer>
-			<key>ypos</key>
-			<integer>90</integer>
+			<integer>300</integer>
 		</dict>
 		<key>D449CB87-B64C-41F5-8FF0-C93C75686459</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
-			<key>ypos</key>
-			<integer>90</integer>
+			<integer>500</integer>
 		</dict>
 	</dict>
-	<key>variables</key>
-	<dict>
-		<key>branch</key>
-		<string>9.x</string>
-	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>master</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Leave blank for 'master. Or enter an integer. For example, using 12 will search the 12.x docs.</string>
+			<key>label</key>
+			<string>Version/Branch</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>branch</string>
+		</dict>
+	</array>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.3.3</string>
+	<string>0.4.0</string>
 	<key>webaddress</key>
 	<string>https://till.im</string>
 </dict>
