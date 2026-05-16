@@ -35,7 +35,9 @@ $algolia = SearchClient::create('E3MIRNPJH5', '1fa3a8fec06eb1858d6ca137211225c0'
 
 $search = $algolia->searchSingleIndex('laravel', [
     'query' => $query,
-    'facetFilters' => [sprintf('version:%s', $branch ?: 'master')],
+    'facetFilters' => [
+        sprintf('version:%s', $branch ?: 'master')
+    ],
 ]);
 
 $results = $search['hits'];
