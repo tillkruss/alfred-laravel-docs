@@ -2,8 +2,7 @@
 
 use Alfred\Workflows\Workflow;
 
-use Algolia\AlgoliaSearch\SearchClient;
-use Algolia\AlgoliaSearch\Support\UserAgent;
+use Algolia\AlgoliaSearch\Api\SearchClient;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -34,12 +33,10 @@ if (empty($subtext)) {
 $workflow = new Workflow;
 $algolia = SearchClient::create('E3MIRNPJH5', '1fa3a8fec06eb1858d6ca137211225c0');
 
-UserAgent::addCustomUserAgent('Alfred Workflow', '0.4.0');
-
-$index = $algolia->initIndex('laravel');
-$search = $index->search($query, ['facetFilters' => [
-    sprintf('version:%s', $branch ?: 'master'),
-]]);
+$search = $algolia->searchSingleIndex('laravel', [
+    'query' => $query,
+    'facetFilters' => [sprintf('version:%s', $branch ?: 'master')],
+]);
 
 $results = $search['hits'];
 $subtextSupported = $subtext === '0' || $subtext === '2';
